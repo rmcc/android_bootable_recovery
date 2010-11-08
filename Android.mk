@@ -134,6 +134,12 @@ ifdef BOARD_HAS_SMALL_RECOVERY
   LOCAL_CFLAGS += -DBOARD_HAS_SMALL_RECOVERY
 endif
 
+ifdef BOARD_RECOVERY_FONT_SIZE
+   BOARD_RECOVERY_FONT_SIZE:=$(subst x, ,$(BOARD_RECOVERY_FONT_SIZE))
+   LOCAL_CFLAGS += -DCHAR_WIDTH=$(word 1,$(BOARD_RECOVERY_FONT_SIZE))
+   LOCAL_CFLAGS += -DCHAR_HEIGHT=$(word 2,$(BOARD_RECOVERY_FONT_SIZE))
+endif
+
 # This binary is in the recovery ramdisk, which is otherwise a copy of root.
 # It gets copied there in config/Makefile.  LOCAL_MODULE_TAGS suppresses
 # a (redundant) copy of the binary in /system/bin for user builds.
